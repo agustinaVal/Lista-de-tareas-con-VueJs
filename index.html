@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>VueJs</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1> {{ "hola bienvenidos" +  "a esta clase de vuejs" | capitalize }} </h1>
+        <h2 v-if="15 < 5"> Esto No se va a mostrar </h2>
+        <input v-model="tarea" type="text">
+        <button @click="agregarTarea">Agregar Tarea</button>
+        <ul>
+            <li v-for="tarea of tareas "> <a href="#" @click="eliminarTarea(tarea)"> x</a>
+                {{tarea}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const saludo = new Vue({
+            el: "#app",
+            data: {
+                tareas: [],
+                tarea: " "
+            },
+            methods: {
+                agregarTarea() {
+                    this.tareas.push(this.tarea);
+                    this.tarea = " "
+                },
+                eliminarTarea(tarea) {
+                    if (confirm("¿Quieres eliminar?"))
+                        this.tareas.$remove(tarea);
+                }
+            },
+        });
+    </script>
+</body>
+</html>
